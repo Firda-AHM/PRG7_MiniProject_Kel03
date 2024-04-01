@@ -1,74 +1,66 @@
 package id.ac.astra.polytechnic.prg7_miniproject_kel03.vo;
 
-import id.co.prg7_sertifikasi.model.User;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.model.Camera;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 public class CameraVo {
-    private int id;
-    private String name;
-    private String username;
-    private String email;
-    private String role;
+    private int cam_id;
+    private String cam_name;
+    private String cam_type;
+    private BigDecimal cam_price;
+    private Integer cam_status;
 
-    private int prodi;
 
     public CameraVo() {
     }
 
-    public CameraVo(User user) {
-        this.id = user.getUsr_id();
-        this.name = user.getUsr_name();
-        this.username = user.getUsr_username();
-        this.email = user.getUsr_email();
-        this.role = user.getUsr_role();
-        this.prodi = user.getPro_id();
+    public CameraVo(Camera camera) {
+        this.cam_id = camera.getUsr_id();
+        this.cam_name = camera.getUsr_name();
+        this.cam_type = camera.getCam_type();
+        this.cam_price = camera.getCam_price();
+        this.cam_status = camera.getCam_status();
     }
 
-    public int getId() {
-        return id;
+    public int getCam_id() {
+        return cam_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCam_id(int cam_id) {
+        this.cam_id = cam_id;
     }
 
-    public String getName() {
-        return name;
+    public String getCam_name() {
+        return cam_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCam_name(String cam_name) {
+        this.cam_name = cam_name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getCam_type() {
+        return cam_type;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setCam_type(String cam_type) {
+        this.cam_type = cam_type;
     }
 
-    public String getEmail() {
-        return email;
+    public BigDecimal getCam_price() {
+        return cam_price;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCam_price(BigDecimal cam_price) {
+        this.cam_price = cam_price;
     }
 
-    public String getRole() {
-        return role;
+    public Integer getCam_status() {
+        return cam_status;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setCam_status(Integer cam_status) {
+        this.cam_status = cam_status;
     }
-
-    public int getProdi() {
-        return prodi;
-    }
-
-    public void setProdi(int prodi) {
-        this.prodi = prodi;
-    }
-
 }

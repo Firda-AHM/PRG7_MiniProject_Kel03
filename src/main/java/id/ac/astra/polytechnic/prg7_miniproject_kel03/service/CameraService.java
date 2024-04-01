@@ -1,14 +1,13 @@
 package id.ac.astra.polytechnic.prg7_miniproject_kel03.service;
 
-import id.co.prg7_sertifikasi.model.User;
-import id.co.prg7_sertifikasi.response.DtoResponse;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.model.Camera;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.response.DtoResponse;
+
 
 public interface CameraService {
-    DtoResponse getUserById(int id);
-    DtoResponse getByUsername(String username);
-    DtoResponse getByUsernameAndEmail(String username, String email);
-    DtoResponse getUsers();
-    DtoResponse saveUser(User user);
-    DtoResponse updateUser(User user);
-    DtoResponse deleteUser(User user);
+    DtoResponse getAllCameras();
+    DtoResponse getCameraById(int id);
+    DtoResponse saveCamera(Camera camera);
+    DtoResponse updateCamera(Camera camera);
+    DtoResponse deleteCamera(Camera camera);
 }

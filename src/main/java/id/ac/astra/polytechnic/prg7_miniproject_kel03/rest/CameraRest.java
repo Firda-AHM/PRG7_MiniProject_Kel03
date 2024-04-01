@@ -1,9 +1,9 @@
 package id.ac.astra.polytechnic.prg7_miniproject_kel03.rest;
 
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.dao.CameraDao;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.model.Camera;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.response.DtoResponse;
 import id.ac.astra.polytechnic.prg7_miniproject_kel03.service.CameraService;
-import id.co.prg7_sertifikasi.model.User;
-import id.co.prg7_sertifikasi.response.DtoResponse;
-import id.co.prg7_sertifikasi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,35 +13,33 @@ import org.springframework.web.bind.annotation.*;
 public class CameraRest {
     @Autowired
     private CameraService cameraService;
+    @Autowired
+    private CameraDao cameraDao;
 
     public CameraRest(CameraService cameraService) {
         this.cameraService = cameraService;
     }
 
     @GetMapping("/getUsers")
-    public DtoResponse getUsers(){
-        return userService.getUsers();
+    public DtoResponse getAllCameras(){
+        return cameraService.getAllCameras();
     }
 
-    @PostMapping("/saveUser")
-    public DtoResponse createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    @PostMapping("/addCamera")
+    public DtoResponse createCamera(@RequestBody Camera camera) {
+        return cameraService.saveCamera(camera);
     }
 
-    @GetMapping("/getUser/{id}")
-    public DtoResponse getUserById(@PathVariable int id) {
-        return userService.getUserById(id);
+    @GetMapping("/getCamera/{id}")
+    public DtoResponse getCameraById(@PathVariable int id) {
+        return cameraService.getCameraById(id);
     }
-    @GetMapping("/getByUsername/{username}")
-    public DtoResponse getByUsername(@PathVariable String username) {
-        return userService.getByUsername(username);
+    @PutMapping("/updateCamera/{id}")
+    public DtoResponse updateCamera(@RequestBody Camera user) {
+        return cameraService.updateCamera(user);
     }
-    @PutMapping("/updateUser/{id}")
-    public DtoResponse updateUser(@RequestBody User user) {
-        return userService.updateUser(user);
-    }
-    @DeleteMapping("/deleteUser/{id}")
-    public DtoResponse deleteUser(@PathVariable User user) {
-        return userService.deleteUser(user);
+    @DeleteMapping("/deleteCamera/{id}")
+    public DtoResponse deleteCamera(@PathVariable Camera camera) {
+        return cameraService.deleteCamera(camera);
     }
 }

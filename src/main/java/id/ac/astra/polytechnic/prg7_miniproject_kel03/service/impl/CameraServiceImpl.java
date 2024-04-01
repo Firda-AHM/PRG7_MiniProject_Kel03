@@ -1,86 +1,58 @@
 package id.ac.astra.polytechnic.prg7_miniproject_kel03.service.impl;
 
-import id.co.prg7_sertifikasi.dao.UserDao;
-import id.co.prg7_sertifikasi.model.User;
-import id.co.prg7_sertifikasi.repository.UserRepository;
-import id.co.prg7_sertifikasi.response.DtoResponse;
-import id.co.prg7_sertifikasi.service.UserService;
-import id.co.prg7_sertifikasi.vo.UserVo;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.dao.CameraDao;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.model.Camera;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.repository.CameraRepository;
+
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.response.DtoResponse;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.service.CameraService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static id.co.prg7_sertifikasi.constant.SkemaConstant.*;
+import static id.ac.astra.polytechnic.prg7_miniproject_kel03.constant.CameraConstant.*;
 
 @Service
 @Transactional
-public class CameraServiceImpl implements UserService {
+public class CameraServiceImpl implements CameraService {
     @Autowired
-    private UserDao userDao;
+    private CameraDao cameraDao;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Override
-    public DtoResponse getUserById(int id) {
-        if (userDao.getUserById(id) != null) {
-            return new DtoResponse(200,userDao.getUserById(id));
-        }
-        return new DtoResponse(200,null,mEmptyData);
-    }
+    private CameraRepository cameraRepository;
+
 
     @Override
-    public DtoResponse getByUsername(String username) {
-        if (userDao.getByUsername(username) != null) {
-            return new DtoResponse(200,userDao.getByUsername(username));
+    public DtoResponse getAllCameras(){
+        if(cameraDao.getAllCameras() != null){
+            return new DtoResponse(200, cameraDao.getAllCameras());
         }
-        return new DtoResponse(200,null,mEmptyData);
+        return new DtoResponse(200, null, mEmptyData);
     }
-
     @Override
-    public DtoResponse getByUsernameAndEmail(String username, String email) {
-        if (userDao.getByUsernameAndEmail(username,email) != null) {
-            return new DtoResponse(200,userDao.getByUsernameAndEmail(username,email));
+    public DtoResponse getCameraById(int id){
+        if(cameraDao.getCameraById(id) != null){
+            return new DtoResponse(200, cameraDao.getCameraById(id));
         }
-        return new DtoResponse(200,null,mEmptyData);
+        return new DtoResponse(200, null, mEmptyData);
     }
-
     @Override
-    public DtoResponse getUsers() {
-        if (userDao.getAllUsers() != null) {
-            List<UserVo> userVos = userDao.getAllUsers();
-            return new DtoResponse(200,userVos);
-        }
-        return new DtoResponse(200,null,mEmptyData);
-    }
-
-    @Override
-    public DtoResponse saveUser(User user) {
-        UserVo userIsExsit = userDao.getByUsernameAndEmail(user.getUsr_username(), user.getUsr_email());
-        if (userIsExsit != null) {
-            return new DtoResponse(200,user,mCreateFailed);
-        } else {
-            String encryptedPassword = passwordEncoder.encode(user.getUsr_password());
-            user.setUsr_password(encryptedPassword);
+    public DtoResponse saveCamera(Camera camera) {
             try {
-                userRepository.save(user);
-                return new DtoResponse(200,user,mCreateSuccess);
+                cameraRepository.save(camera);
+                return new DtoResponse(200,camera,mCreateSuccess);
             } catch (Exception e) {
-                return new DtoResponse(200,user,mCreateFailed);
+                return new DtoResponse(200,camera,mCreateFailed);
             }
         }
 
-    }
-
     @Override
-    public DtoResponse updateUser(User user) {
+    public DtoResponse updateCamera(Camera camera) {
         try{
-            User updatedUser = userRepository.save(user);
-            if (updatedUser != null) {
-                return new DtoResponse(200, updatedUser, mUpdateSuccess);
+            Camera updatedCamera = cameraRepository.save(camera);
+            if (updatedCamera != null) {
+                return new DtoResponse(200, updatedCamera, mUpdateSuccess);
             } else {
                 return new DtoResponse(200, null, mNotFound);
             }
@@ -90,14 +62,14 @@ public class CameraServiceImpl implements UserService {
     }
 
     @Override
-    public DtoResponse deleteUser(User user) {
-        User userData = userRepository.findById(user.getUsr_id()).orElseThrow();
-        if (userData != null) {
+    public DtoResponse deleteCamera(Camera camera) {
+        Camera cameraData = cameraRepository.findById(camera.getCam_id()).orElseThrow();
+        if (cameraData != null) {
             try{
-                userRepository.delete(user);
-                return new DtoResponse(200, userData, mDeleteSuccess);
+                cameraRepository.delete(camera);
+                return new DtoResponse(200, cameraData, mDeleteSuccess);
             } catch (Exception e) {
-                return new DtoResponse(200,userData,mDeleteFailed);
+                return new DtoResponse(200,cameraData,mDeleteFailed);
             }
         }
         return new DtoResponse(200, null, mNotFound);
