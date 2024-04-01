@@ -17,8 +17,8 @@ public class CameraVo {
     }
 
     public CameraVo(Camera camera) {
-        this.cam_id = camera.getUsr_id();
-        this.cam_name = camera.getUsr_name();
+        this.cam_id = camera.getCam_id();
+        this.cam_name = camera.getCam_name();
         this.cam_type = camera.getCam_type();
         this.cam_price = camera.getCam_price();
         this.cam_status = camera.getCam_status();
