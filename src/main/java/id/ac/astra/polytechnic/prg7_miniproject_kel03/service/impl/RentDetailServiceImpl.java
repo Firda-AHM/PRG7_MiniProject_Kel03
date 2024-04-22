@@ -83,10 +83,6 @@ public class RentDetailServiceImpl implements RentDetailService {
             RentDetail rentDetail =new RentDetail();
             rentDetail.setRentDetailPK(rentDetailPK);
             rentDetail.setDrn_subtotal(rentDetailVoForm.getDrnSubtotal());
-            rentDetail.setDrn_created_by(rentDetailVoForm.getDrnCreatedBy());
-            rentDetail.setDrn_created_date(rentDetailVoForm.getDrnCreatedDate());
-            rentDetail.setDrn_modified_by(rentDetailVoForm.getDrnModifiedBy());
-            rentDetail.setDrn_modified_date(rentDetailVoForm.getDrnModifiedDate());
 
             rentDetailRepository.save(rentDetail);
             return new DtoResponse(200, rentDetail, mCreateSuccess);
