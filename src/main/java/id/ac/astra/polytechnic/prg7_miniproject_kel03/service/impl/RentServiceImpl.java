@@ -5,6 +5,7 @@ import id.ac.astra.polytechnic.prg7_miniproject_kel03.model.Rent;
 import id.ac.astra.polytechnic.prg7_miniproject_kel03.repository.RentRepository;
 import id.ac.astra.polytechnic.prg7_miniproject_kel03.response.DtoResponse;
 import id.ac.astra.polytechnic.prg7_miniproject_kel03.service.RentService;
+import id.ac.astra.polytechnic.prg7_miniproject_kel03.vo.RentVo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
 
 import static id.ac.astra.polytechnic.prg7_miniproject_kel03.constant.CameraConstant.*;
 
@@ -50,6 +52,11 @@ public class RentServiceImpl implements RentService {
             rent.setRnt_modified_date(new Date());
 
             rentRepository.save(rent);
+            List<RentVo> allRents = rentDao.getAllRents();
+
+            RentVo lastRentVo = allRents.get(allRents.size() - 1);
+
+            rent.setRnt_id(lastRentVo.getRntId());
             return new DtoResponse(200, rent, mCreateSuccess);
         } catch (Exception e) {
             return new DtoResponse(500,rent,mCreateFailed);

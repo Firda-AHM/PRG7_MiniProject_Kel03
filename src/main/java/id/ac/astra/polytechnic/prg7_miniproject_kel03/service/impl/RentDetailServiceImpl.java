@@ -65,10 +65,9 @@ public class RentDetailServiceImpl implements RentDetailService {
     @Override
     public DtoResponse saveRentDetail(RentDetailVoForm rentDetailVoForm) {
         try {
-            if (!rentRepository.existsById(rentDetailVoForm.getRntId()) || !cameraRepository.existsById(rentDetailVoForm.getCamId())) {
-                return new DtoResponse(500, rentDetailVoForm, mRentOrCameraNotFound);
-            }
-
+//            if (!rentRepository.existsById(rentDetailVoForm.getRntId()) || !cameraRepository.existsById(rentDetailVoForm.getCamId())) {
+//                return new DtoResponse(500, rentDetailVoForm, mRentOrCameraNotFound);
+//            }
             RentDetailPK rentDetailPK = new RentDetailPK();
             rentDetailPK.setRnt_id(rentDetailVoForm.getRntId());
             rentDetailPK.setCam_id(rentDetailVoForm.getCamId());

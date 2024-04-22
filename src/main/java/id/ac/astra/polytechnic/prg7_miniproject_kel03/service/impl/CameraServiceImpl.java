@@ -50,6 +50,21 @@ public class CameraServiceImpl implements CameraService {
     @Override
     public DtoResponse updateCamera(Camera camera) {
         try{
+            Camera cameraToUpdate = cameraRepository.findById(camera.getCam_id()).orElseThrow();
+
+            if (camera.getCam_name() != null) {
+                cameraToUpdate.setCam_name(camera.getCam_name());
+            }
+            if (camera.getCam_type() != null) {
+                cameraToUpdate.setCam_type(camera.getCam_type());
+            }
+            if (camera.getCam_price() != null) {
+                cameraToUpdate.setCam_price(camera.getCam_price());
+            }
+            if (camera.getCam_status() != null) {
+                cameraToUpdate.setCam_status(camera.getCam_status());
+            }
+
             Camera updatedCamera = cameraRepository.save(camera);
             if (updatedCamera != null) {
                 return new DtoResponse(200, updatedCamera, mUpdateSuccess);
@@ -63,15 +78,18 @@ public class CameraServiceImpl implements CameraService {
 
     @Override
     public DtoResponse deleteCamera(Camera camera) {
-        Camera cameraData = cameraRepository.findById(camera.getCam_id()).orElseThrow();
-        if (cameraData != null) {
-            try{
-                cameraRepository.delete(camera);
+        try {
+            Camera cameraData = cameraRepository.findById(camera.getCam_id()).orElseThrow();
+            if (cameraData != null) {
+                cameraData.setCam_status(0); // Set status barang menjadi nonaktif
+                cameraRepository.save(cameraData);
                 return new DtoResponse(200, cameraData, mDeleteSuccess);
-            } catch (Exception e) {
-                return new DtoResponse(200,cameraData,mDeleteFailed);
+            } else {
+                return new DtoResponse(404, mNotFound);
             }
+        } catch (Exception e) {
+            return new DtoResponse(500, mDeleteFailed);
         }
-        return new DtoResponse(200, null, mNotFound);
     }
+
 }

@@ -38,8 +38,8 @@ public class CameraRest {
     public DtoResponse updateCamera(@RequestBody Camera user) {
         return cameraService.updateCamera(user);
     }
-    @DeleteMapping("/deleteCamera/{id}")
-    public DtoResponse deleteCamera(@PathVariable Camera camera) {
+    @PostMapping("/deleteCamera")
+    public DtoResponse deleteCamera(@RequestBody Camera camera) {
         return cameraService.deleteCamera(camera);
     }
 }
