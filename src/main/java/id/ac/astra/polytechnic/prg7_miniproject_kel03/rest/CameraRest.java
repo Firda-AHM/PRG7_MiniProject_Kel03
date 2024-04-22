@@ -29,7 +29,7 @@ public class CameraRest {
     public DtoResponse createCamera(@RequestBody Camera camera) {
         return cameraService.saveCamera(camera);
     }
-
+    //tambah
     @GetMapping("/getCamera/{id}")
     public DtoResponse getCameraById(@PathVariable int id) {
         return cameraService.getCameraById(id);
