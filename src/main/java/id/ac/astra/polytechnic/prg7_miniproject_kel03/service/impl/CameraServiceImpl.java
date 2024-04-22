@@ -65,7 +65,7 @@ public class CameraServiceImpl implements CameraService {
                 cameraToUpdate.setCam_status(camera.getCam_status());
             }
 
-            Camera updatedCamera = cameraRepository.save(camera);
+            Camera updatedCamera = cameraRepository.save(cameraToUpdate);
             if (updatedCamera != null) {
                 return new DtoResponse(200, updatedCamera, mUpdateSuccess);
             } else {

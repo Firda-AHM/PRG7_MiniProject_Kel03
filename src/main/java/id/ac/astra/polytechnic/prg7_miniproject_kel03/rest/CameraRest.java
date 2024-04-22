@@ -20,7 +20,7 @@ public class CameraRest {
         this.cameraService = cameraService;
     }
 
-    @GetMapping("/getUsers")
+    @GetMapping("/getCameras")
     public DtoResponse getAllCameras(){
         return cameraService.getAllCameras();
     }
