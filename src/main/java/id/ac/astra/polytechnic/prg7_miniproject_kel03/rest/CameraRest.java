@@ -34,7 +34,7 @@ public class CameraRest {
     public DtoResponse getCameraById(@PathVariable int id) {
         return cameraService.getCameraById(id);
     }
-    @PutMapping("/updateCamera")
+    @PostMapping("/updateCamera")
     public DtoResponse updateCamera(@RequestBody Camera user) {
         return cameraService.updateCamera(user);
     }
