@@ -20,6 +20,10 @@ public class RentDetailRest {
     public DtoResponse getAllRentDetails(){
         return rentDetailService.getAllRentDetails();
     }
+    @GetMapping("/getRentDetailsByRentId/{id}")
+    public DtoResponse getRentDetailsByRentId(@PathVariable int id){
+        return rentDetailService.getRentDetailByRentId(id);
+    }
     @PostMapping("/addRentDetail")
     public DtoResponse createRentDetail(@RequestBody RentDetailVoForm rentDetailVoForm) {
         return rentDetailService.saveRentDetail(rentDetailVoForm);

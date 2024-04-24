@@ -27,7 +27,7 @@ public class RentRest {
     public DtoResponse getRentById(@PathVariable int id) {
         return rentService.getRentById(id);
     }
-    @PutMapping("/updateRent")
+    @PostMapping("/updateRent")
     public DtoResponse updateRent(@RequestBody Rent rent) {
         return rentService.updateRent(rent);
     }

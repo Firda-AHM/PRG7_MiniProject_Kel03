@@ -13,6 +13,7 @@ public class RentVo {
     private Integer time;
     private BigDecimal total;
     private BigDecimal charge;
+    private Integer rnt_status;
 
     public RentVo() {
     }
@@ -25,6 +26,15 @@ public class RentVo {
         this.time = rent.getRnt_time();
         this.total = rent.getRnt_total();
         this.charge = rent.getRnt_charge();
+        this.rnt_status = rent.getRnt_status();
+    }
+
+    public Integer getRnt_status() {
+        return rnt_status;
+    }
+
+    public void setRnt_status(Integer rnt_status) {
+        this.rnt_status = rnt_status;
     }
 
     public Integer getRntId() {
